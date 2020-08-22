@@ -1,6 +1,8 @@
 import yaml
+import itertools
+from commander import Commander
 
-commanders = {}
+commanders = []
 
 def getCommanders():
 	global commanders
@@ -12,14 +14,26 @@ def getCommanders():
 	myYaml = yaml.safe_load(myFile)
 
 	myFile.close()
-	print("hi")
 
-	commanders = myYaml['commanders']
+	for commander, details in myYaml["commanders"].items():
+		commanders.append(Commander(commander, details))
 
 	return commanders
 
+def getCompletePairings():
+	return list(itertools.combinations(getCommanders(),2))
 
-print(getCommanders())
+def getNewCommanderPairings(commanderName = ""):
+	# if no commanderName was supplied, last entry in commanders is assumed to be the new one
+	if(not commanderName):
+		newCommander = getCommanders()[-1]
+	else:
+		for commander in getCommanders():
+			if commander.name == commanderName:
+				newCommander = commander
+				break
 
-print(getCommanders())
+	oldCommanderList = filter(lambda com: com != newCommander, getCommanders())
+
+	return list(itertools.product([newCommander], oldCommanderList))
 

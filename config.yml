@@ -7,31 +7,31 @@ commanders :
     race : Protoss
   Swann :
     race : Terran
-  Zagara :
-    race : Zerg
-  Vorazun :
-    race : Protoss
-  Karax :
-    race : Protoss
-  Abathur :
-    race : Zerg
-  Alarak :
-    race : Protoss
-  Nova :
-    race : Terran
-  Stukov :
-    race : Zerg
-  Fenix :
-    race : Protoss
-  Dehaka :
-    race : Zerg
-  Han & Horner :
-    race : Terran
-  Tychus :
-    race : Terran
-  Zeratul :
-    race : Protoss
-  Stetmann :
-    race : Zerg
-  Mengsk :
-    race : Terran
+#  Zagara :
+#    race : Zerg
+#  Vorazun :
+#    race : Protoss
+#  Karax :
+#    race : Protoss
+#  Abathur :
+#    race : Zerg
+#  Alarak :
+#    race : Protoss
+#  Nova :
+#    race : Terran
+#  Stukov :
+#    race : Zerg
+#  Fenix :
+#    race : Protoss
+#  Dehaka :
+#    race : Zerg
+#  Han & Horner :
+#    race : Terran
+#  Tychus :
+#    race : Terran
+#  Zeratul :
+#    race : Protoss
+#  Stetmann :
+#    race : Zerg
+#  Mengsk :
+#    race : Terran
