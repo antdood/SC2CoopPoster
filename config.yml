@@ -1,37 +1,91 @@
-commanders : 
-  Raynor :
-    race : Terran
-  Kerrigan :
-    race : Zerg
-  Artanis :
-    race : Protoss
-  Swann :
-    race : Terran
-#  Zagara :
-#    race : Zerg
-#  Vorazun :
-#    race : Protoss
-#  Karax :
-#    race : Protoss
-#  Abathur :
-#    race : Zerg
-#  Alarak :
-#    race : Protoss
-#  Nova :
-#    race : Terran
-#  Stukov :
-#    race : Zerg
-#  Fenix :
-#    race : Protoss
-#  Dehaka :
-#    race : Zerg
-#  Han & Horner :
-#    race : Terran
-#  Tychus :
-#    race : Terran
-#  Zeratul :
-#    race : Protoss
-#  Stetmann :
-#    race : Zerg
-#  Mengsk :
-#    race : Terran
+commanders:
+  Raynor:
+    race: Terran
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/raynor
+    wikilink: https://starcraft.fandom.com/wiki/Jim_Raynor_(Co-op_Missions)
+  Kerrigan:
+    race: Zerg
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/kerrigan
+    wikilink: https://starcraft.fandom.com/wiki/Sarah_Kerrigan_(Co-op_Missions)
+  Artanis:
+    race: Protoss
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/artanis
+    wikilink: https://starcraft.fandom.com/wiki/Artanis_(Co-op_Missions)
+  Swann:
+    race: Terran
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/swann
+    wikilink: https://starcraft.fandom.com/wiki/Rory_Swann_(Co-op_Missions)
+  Zagara:
+    race: Zerg
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/zagara
+    wikilink: https://starcraft.fandom.com/wiki/Zagara_(Co-op_Missions)
+  Vorazun:
+    race: Protoss
+    date: 2015-10-06
+    sc2cooplink: https://starcraft2coop.com/commanders/vorazun
+    wikilink: https://starcraft.fandom.com/wiki/Vorazun_(Co-op_Missions)
+  Karax:
+    race: Protoss
+    date: 2015-12-15
+    sc2cooplink: https://starcraft2coop.com/commanders/karax
+    wikilink: https://starcraft.fandom.com/wiki/Karax_(Co-op_Missions)
+  Abathur:
+    race: Zerg
+    date: 2016-05-17
+    sc2cooplink: https://starcraft2coop.com/commanders/abathur
+    wikilink: https://starcraft.fandom.com/wiki/Abathur_(Co-op_Missions)
+  Alarak:
+    race: Protoss
+    date: 2016-09-13
+    sc2cooplink: https://starcraft2coop.com/commanders/alarak
+    wikilink: https://starcraft.fandom.com/wiki/Alarak_(Co-op_Missions)
+  Nova:
+    race: Terran
+    date: 2016-10-18
+    sc2cooplink: https://starcraft2coop.com/commanders/nova
+    wikilink: https://starcraft.fandom.com/wiki/Nova_Terra_(Co-op_Missions)
+  Stukov:
+    race: Zerg
+    date: 2016-12-13
+    sc2cooplink: https://starcraft2coop.com/commanders/stukov
+    wikilink: https://starcraft.fandom.com/wiki/Alexei_Stukov_(Co-op_Missions)
+  Fenix:
+    race: Protoss
+    date: 2017-05-02
+    sc2cooplink: https://starcraft2coop.com/commanders/fenix
+    wikilink: https://starcraft.fandom.com/wiki/Fenix_(Co-op_Missions)
+  Dehaka:
+    race: Zerg
+    date: 2017-07-18
+    sc2cooplink: https://starcraft2coop.com/commanders/dehaka
+    wikilink: https://starcraft.fandom.com/wiki/Dehaka_(Co-op_Missions)
+  Han & Horner:
+    race: Terran
+    date: 2017-11-14
+    sc2cooplink: https://starcraft2coop.com/commanders/horner
+    wikilink: https://starcraft.fandom.com/wiki/Mira_Han_and_Matt_Horner_(Co-op_Missions)
+  Tychus:
+    race: Terran
+    date: 2018-09-04
+    sc2cooplink: https://starcraft2coop.com/commanders/tychus
+    wikilink: https://starcraft.fandom.com/wiki/Tychus_Findlay_(Co-op_Missions)
+  Zeratul:
+    race: Protoss
+    date: 2018-11-13
+    sc2cooplink: https://starcraft2coop.com/commanders/zeratul
+    wikilink: https://starcraft.fandom.com/wiki/Egon_Stetmann_(Co-op_Missions)
+  Stetmann:
+    race: Zerg
+    date: 2019-05-21
+    sc2cooplink: https://starcraft2coop.com/commanders/stetmann
+    wikilink: 
+  Mengsk:
+    race: Terran
+    date: 2019-11-26
+    sc2cooplink: https://starcraft2coop.com/commanders/mengsk
+    wikilink: https://starcraft.fandom.com/wiki/Arcturus_Mengsk_(Co-op_Missions)

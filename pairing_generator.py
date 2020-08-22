@@ -36,5 +36,3 @@ def getNewCommanderPairings(commanderName = ""):
 	oldCommanderList = filter(lambda com: com != newCommander, getCommanders())
 
 	return list(product([newCommander], oldCommanderList))
-
-print(getCompletePairings())
