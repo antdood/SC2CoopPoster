@@ -1,5 +1,5 @@
-import yaml
-import itertools
+from yaml import safe_load
+from itertools import product, combinations
 from commander import Commander
 
 commanders = []
@@ -11,7 +11,7 @@ def getCommanders():
 
 	myFile = open("config.yml", "r")
 
-	myYaml = yaml.safe_load(myFile)
+	myYaml = safe_load(myFile)
 
 	myFile.close()
 
@@ -21,7 +21,7 @@ def getCommanders():
 	return commanders
 
 def getCompletePairings():
-	return list(itertools.combinations(getCommanders(),2))
+	return list(combinations(getCommanders(),2))
 
 def getNewCommanderPairings(commanderName = ""):
 	# if no commanderName was supplied, last entry in commanders is assumed to be the new one
@@ -35,5 +35,6 @@ def getNewCommanderPairings(commanderName = ""):
 
 	oldCommanderList = filter(lambda com: com != newCommander, getCommanders())
 
-	return list(itertools.product([newCommander], oldCommanderList))
+	return list(product([newCommander], oldCommanderList))
 
+print(getCompletePairings())
