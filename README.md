@@ -1,3 +1,3 @@
 # SC2CoopPoster
 
-Posts a summary every other week on /r/SC2CoopPoster
+Posts a discussion thread every week on /r/starcraft2coop
