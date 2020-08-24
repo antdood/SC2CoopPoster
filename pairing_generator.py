@@ -9,15 +9,10 @@ def getCommanders():
 	if(commanders):
 		return commanders
 
-	myFile = open("config.yml", "r")
-
-	myYaml = safe_load(myFile)
-
-	myFile.close()
-
-	for commander, details in myYaml["commanders"].items():
-		commanders.append(Commander(commander, details))
-
+	with open("config.yml", "r") as file:
+		for commander, details in safe_load(file)["commanders"].items():
+			commanders.append(Commander(commander, details))
+			
 	return commanders
 
 def getCompletePairings():
@@ -36,3 +31,4 @@ def getNewCommanderPairings(commanderName = ""):
 	oldCommanderList = filter(lambda com: com != newCommander, getCommanders())
 
 	return list(product([newCommander], oldCommanderList))
+
