@@ -4,7 +4,7 @@ from commander import Commander
 
 commanders = []
 
-def getCommanders():
+def getAllCommanders():
 	global commanders
 	if(commanders):
 		return commanders
@@ -16,19 +16,19 @@ def getCommanders():
 	return commanders
 
 def getCompletePairings():
-	return list(combinations(getCommanders(),2))
+	return list(combinations(getAllCommanders(),2))
 
 def getNewCommanderPairings(commanderName = ""):
 	# if no commanderName was supplied, last entry in commanders is assumed to be the new one
 	if(not commanderName):
-		newCommander = getCommanders()[-1]
+		newCommander = getAllCommanders()[-1]
 	else:
-		for commander in getCommanders():
+		for commander in getAllCommanders():
 			if commander.name == commanderName:
 				newCommander = commander
 				break
 
-	oldCommanderList = filter(lambda com: com != newCommander, getCommanders())
+	oldCommanderList = filter(lambda com: com != newCommander, getAllCommanders())
 
 	return list(product([newCommander], oldCommanderList))
 
