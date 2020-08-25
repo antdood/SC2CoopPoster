@@ -1,5 +1,6 @@
 import pairing_generator as pg
 import random
+import datetime
 from commander import Commander
 from yaml import safe_load, dump
 from reddit_thingamabobs import getRedditInstance
@@ -46,27 +47,29 @@ def convertStrToCommanderPair(inputStr):
 	return tuple(map(Commander, inputStr.split("|")))
 
 if(__name__ == '__main__'):
-	pairings = getRemainingPairings()
-
-	if(len(pairings) == 0):
-		repopulatePairings()
+	today = datetime.date.today()
+	if(today.weekday() == 1):
 		pairings = getRemainingPairings()
 
-	pair = random.choice(pairings)
-	commander_pair = convertStrToCommanderPair(pair)
+		if(len(pairings) == 0):
+			repopulatePairings()
+			pairings = getRemainingPairings()
 
-	with open("Reddit Post Templates/mainTemplate.md") as mainFile, \
-		 open("Reddit Post Templates/commanderTemplate.md") as commanderFile, \
-		 open("Reddit Post Templates/titleTemplate.md") as titleFile:
+		pair = random.choice(pairings)
+		commander_pair = convertStrToCommanderPair(pair)
 
-		mainTemplate = mainFile.read()
-		commanderTemplate = commanderFile.read()
-		titleTemplate = titleFile.read()
+		with open("Reddit Post Templates/mainTemplate.md") as mainFile, \
+			 open("Reddit Post Templates/commanderTemplate.md") as commanderFile, \
+			 open("Reddit Post Templates/titleTemplate.md") as titleFile:
 
-	title = titleTemplate.format(postnumber = getPostNumber(), commander1 = commander_pair[0].name, commander2 = commander_pair[1].name)
-	text = mainTemplate.format(commander1 = commanderTemplate.format(commander_pair[0]), commander2 = commanderTemplate.format(commander_pair[1]))
+			mainTemplate = mainFile.read()
+			commanderTemplate = commanderFile.read()
+			titleTemplate = titleFile.read()
 
-	getRedditInstance().submit(title, selftext = text)
+		title = titleTemplate.format(postnumber = getPostNumber(), commander1 = commander_pair[0].name, commander2 = commander_pair[1].name)
+		text = mainTemplate.format(commander1 = commanderTemplate.format(commander_pair[0]), commander2 = commanderTemplate.format(commander_pair[1]))
 
-	increasePostNumber()
-	removePairingFromFile(pair)
+		getRedditInstance().submit(title, selftext = text)
+
+		increasePostNumber()
+		removePairingFromFile(pair)
