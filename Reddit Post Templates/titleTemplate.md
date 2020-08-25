@@ -1,0 +1,1 @@
+Weekly Commander Discussion #{postnumber} : {commander1} | {commander2}
