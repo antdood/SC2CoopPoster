@@ -1,5 +1,6 @@
 from yaml import safe_load
 import datetime
+import winrates
 
 class Commander:
 	def __init__(self, name, details = None):
@@ -21,3 +22,11 @@ class Commander:
 
 	def __str__(self):
 		return self.name
+
+	@property
+	def winrate(self):
+		return winrates.getWinRateOf(self.name)
+
+	@property
+	def pickrate(self):
+		return winrates.getPickRateOf(self.name)
