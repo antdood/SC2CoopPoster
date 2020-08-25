@@ -2,6 +2,7 @@ import praw
 from yaml import safe_load
 
 reddit = None
+subreddit = "sircmpwn"
 
 def getRedditInstance():
 	global reddit
@@ -15,4 +16,10 @@ def getRedditInstance():
 	reddit = praw.Reddit(**credentials)
 	reddit.validate_on_submit = True
 
-	return reddit.subreddit("sircmpwn")
+	return reddit
+
+def getSubredditInstance():
+	return getRedditInstance().subreddit(subreddit)
+
+def getRedditLink(postID):
+	return getRedditInstance().submission(id = postID)

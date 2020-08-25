@@ -3,7 +3,8 @@ import random
 import datetime
 from commander import Commander
 from yaml import safe_load, dump
-from reddit_thingamabobs import getRedditInstance
+from reddit_thingamabobs import getRedditInstance, getSubredditInstance, getRedditLink
+from more_itertools import take
 
 def getRemainingPairings():
 	with open("remaining_pairings.txt", "r") as file:
@@ -31,24 +32,56 @@ def removePairingFromFile(pair):
 
 	return
 
-def getPostNumber():
-	with open("config.yml", "r") as file:
-		return safe_load(file)["postnumber"]
+def convertStrToCommanderPair(inputStr):
+	return tuple(map(Commander, inputStr.split("|")))
 
-def increasePostNumber():
+def getCurrentPostNumber():
+	return len(getPostHistory()) + 1
+
+def getPostHistory():
+	with open("config.yml", "r") as file:
+		return safe_load(file)["posthistory"] or {}
+
+def generatePostHistoryEntry(postID, pair):
+	return {"url" : getRedditLink(postID).url, "pair" : pair}
+
+def addPostHistory(entry):
 	with open("config.yml", "r") as file:
 		config = safe_load(file)
-		config["postnumber"] += 1
+
+	# for first run, should be a better way to do this 
+	if(config["posthistory"] == None):
+		config["posthistory"] = {}
+
+	config["posthistory"][getCurrentPostNumber()] = entry
 
 	with open("config.yml", "w") as file:
 		dump(config, file)
 
-def convertStrToCommanderPair(inputStr):
-	return tuple(map(Commander, inputStr.split("|")))
+	return
+
+def generatePrevPostSection():
+	postHistory = getPostHistory()
+
+	if(postHistory == {}):
+		return ""
+	else:
+		with open("Reddit Post Templates/previousPostSectionTemplate.md") as prevPostSectionFile, \
+			 open("Reddit Post Templates/previousPostTemplate.md") as prevPostFile:
+
+			prevPostSectTemplate = prevPostSectionFile.read()
+			prevPostTemplate = prevPostFile.read()
+
+			prevPostSectText = ""
+			for postNumber, details in take(5, reversed(postHistory.items())):
+				prevPostSectText += prevPostTemplate.format(postNumber, **details) + "\n"
+
+			return prevPostSectTemplate.format(prevPostSectText)
+
 
 if(__name__ == '__main__'):
 	today = datetime.date.today()
-	if(today.weekday() == 1):
+	if(today.weekday() == 1 or True):
 		pairings = getRemainingPairings()
 
 		if(len(pairings) == 0):
@@ -66,10 +99,12 @@ if(__name__ == '__main__'):
 			commanderTemplate = commanderFile.read()
 			titleTemplate = titleFile.read()
 
-		title = titleTemplate.format(postnumber = getPostNumber(), commander1 = commander_pair[0].name, commander2 = commander_pair[1].name)
-		text = mainTemplate.format(commander1 = commanderTemplate.format(commander_pair[0]), commander2 = commanderTemplate.format(commander_pair[1]))
+		prevPostSect = generatePrevPostSection()
 
-		getRedditInstance().submit(title, selftext = text)
+		title = titleTemplate.format(postnumber = getCurrentPostNumber(), commander1 = commander_pair[0].name, commander2 = commander_pair[1].name)
+		text = mainTemplate.format(commander1 = commanderTemplate.format(commander_pair[0]), commander2 = commanderTemplate.format(commander_pair[1]), prevPostSect = prevPostSect)
 
-		increasePostNumber()
+		postID = getSubredditInstance().submit(title, selftext = text)
+		
+		addPostHistory(generatePostHistoryEntry(postID, pair))
 		removePairingFromFile(pair)
