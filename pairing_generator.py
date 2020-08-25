@@ -19,9 +19,9 @@ def getCompletePairings():
 	return list(combinations(getAllCommanders(),2))
 
 def getNewCommanderPairings(commanderName = ""):
-	# if no commanderName was supplied, last entry in commanders is assumed to be the new one
+	# if no commanderName was supplied, commander with latest release date is assumed to be the new commander
 	if(not commanderName):
-		newCommander = getAllCommanders()[-1]
+		newCommander = max(getAllCommanders(), key = lambda x: x.date)
 	else:
 		for commander in getAllCommanders():
 			if commander.name == commanderName:
@@ -31,4 +31,3 @@ def getNewCommanderPairings(commanderName = ""):
 	oldCommanderList = filter(lambda com: com != newCommander, getAllCommanders())
 
 	return list(product([newCommander], oldCommanderList))
-
