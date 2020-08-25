@@ -1,6 +1,8 @@
 import pairing_generator as pg
 import random
 from commander import Commander
+from yaml import safe_load, dump
+from reddit_thingamabobs import getRedditInstance
 
 def getRemainingPairings():
 	with open("remaining_pairings.txt", "r") as file:
@@ -28,10 +30,22 @@ def removePairingFromFile(pair):
 
 	return
 
+def getPostNumber():
+	with open("config.yml", "r") as file:
+		return safe_load(file)["postnumber"]
+
+def increasePostNumber():
+	with open("config.yml", "r") as file:
+		config = safe_load(file)
+		config["postnumber"] += 1
+
+	with open("config.yml", "w") as file:
+		dump(config, file)
+
 def convertStrToCommanderPair(inputStr):
 	return tuple(map(Commander, inputStr.split("|")))
 
-if __name__ == '__main__':
+if(__name__ == '__main__'):
 	pairings = getRemainingPairings()
 
 	if(len(pairings) == 0):
@@ -39,8 +53,20 @@ if __name__ == '__main__':
 		pairings = getRemainingPairings()
 
 	pair = random.choice(pairings)
+	commander_pair = convertStrToCommanderPair(pair)
 
-	pair = convertStrToCommanderPair(random.choice(pairings))
+	with open("Reddit Post Templates/mainTemplate.md") as mainFile, \
+		 open("Reddit Post Templates/commanderTemplate.md") as commanderFile, \
+		 open("Reddit Post Templates/titleTemplate.md") as titleFile:
 
-	
+		mainTemplate = mainFile.read()
+		commanderTemplate = commanderFile.read()
+		titleTemplate = titleFile.read()
 
+	title = titleTemplate.format(postnumber = getPostNumber(), commander1 = commander_pair[0].name, commander2 = commander_pair[1].name)
+	text = mainTemplate.format(commander1 = commanderTemplate.format(commander_pair[0]), commander2 = commanderTemplate.format(commander_pair[1]))
+
+	getRedditInstance().submit(title, selftext = text)
+
+	increasePostNumber()
+	removePairingFromFile(pair)
