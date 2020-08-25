@@ -81,7 +81,7 @@ def generatePrevPostSection():
 
 if(__name__ == '__main__'):
 	today = datetime.date.today()
-	if(today.weekday() == 1 or True):
+	if(today.weekday() == 1):
 		pairings = getRemainingPairings()
 
 		if(len(pairings) == 0):

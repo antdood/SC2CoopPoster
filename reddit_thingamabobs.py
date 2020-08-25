@@ -2,7 +2,7 @@ import praw
 from yaml import safe_load
 
 reddit = None
-subreddit = "sircmpwn"
+subreddit = "starcraft2coop"
 
 def getRedditInstance():
 	global reddit
