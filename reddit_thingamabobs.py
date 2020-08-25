@@ -15,4 +15,4 @@ def getRedditInstance():
 	reddit = praw.Reddit(**credentials)
 	reddit.validate_on_submit = True
 
-	return reddit.subreddit("starcraft2coop")
+	return reddit.subreddit("sircmpwn")
