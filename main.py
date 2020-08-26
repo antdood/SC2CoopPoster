@@ -79,10 +79,9 @@ def generatePrevPostSection():
 
 			return prevPostSectTemplate.format(prevPostSectText)
 
-
 if(__name__ == '__main__'):
 	today = datetime.date.today()
-	if(today.weekday() == 1):
+	if(today.weekday() == 2):
 		pairings = getRemainingPairings()
 
 		if(len(pairings) == 0):

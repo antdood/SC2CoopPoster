@@ -1,5 +1,6 @@
 import praw
 from yaml import safe_load
+from file_handler import getFile
 
 reddit = None
 subreddit = "starcraft2coop"

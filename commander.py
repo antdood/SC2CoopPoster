@@ -1,6 +1,7 @@
 from yaml import safe_load
 import datetime
 import winrates
+from file_handler import getFile
 
 class Commander:
 	def __init__(self, name, details = None):
