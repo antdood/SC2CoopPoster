@@ -1,6 +1,7 @@
 from yaml import safe_load
 from itertools import product, combinations
 from commander import Commander
+from file_handler import getFile
 
 commanders = []
 
@@ -9,7 +10,7 @@ def getAllCommanders():
 	if(commanders):
 		return commanders
 
-	with open("config.yml", "r") as file:
+	with getFile("config.yml") as file:
 		for commander, details in safe_load(file)["commanders"].items():
 			commanders.append(Commander(commander, details))
 			

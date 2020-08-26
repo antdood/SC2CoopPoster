@@ -8,7 +8,7 @@ class Commander:
 
 		# get details from config if not supplied
 		if (details == None):
-			with open("config.yml", "r") as file:
+			with getFile("config.yml", "r") as file:
 				details = safe_load(file)["commanders"][name]
 
 		self.race = details["race"]

@@ -5,15 +5,16 @@ from commander import Commander
 from yaml import safe_load, dump
 from reddit_thingamabobs import getRedditInstance, getSubredditInstance, getRedditLink
 from more_itertools import take
+from file_handler import getFile
 
 def getRemainingPairings():
-	with open("remaining_pairings.txt", "r") as file:
+	with getFile("remaining_pairings.txt") as file:
 		# readlines() includes the \n :facepalm:
 		#return file.readlines()
 		return file.read().splitlines()
 
 def repopulatePairings():
-	with open("remaining_pairings.txt", "w") as file:
+	with getFile("remaining_pairings.txt", "w") as file:
 		for pair in pg.getCompletePairings():
 			file.write(str(pair[0]) + "|" + str(pair[1]) + "\n")
 
@@ -21,12 +22,12 @@ def repopulatePairings():
 
 def removePairingFromFile(pair):
 	lines = []
-	with open("remaining_pairings.txt", "r") as file:
+	with getFile("remaining_pairings.txt", "r") as file:
 		lines = file.read().splitlines()
 
 	lines.remove(pair)
 
-	with open("remaining_pairings.txt", "w") as file:
+	with getFile("remaining_pairings.txt", "w") as file:
 		for line in lines:
 			file.write(line + "\n")
 
@@ -39,14 +40,14 @@ def getCurrentPostNumber():
 	return len(getPostHistory()) + 1
 
 def getPostHistory():
-	with open("config.yml", "r") as file:
+	with getFile("config.yml", "r") as file:
 		return safe_load(file)["posthistory"] or {}
 
 def generatePostHistoryEntry(postID, pair):
 	return {"url" : getRedditLink(postID).url, "pair" : pair}
 
 def addPostHistory(entry):
-	with open("config.yml", "r") as file:
+	with getFile("config.yml", "r") as file:
 		config = safe_load(file)
 
 	# for first run, should be a better way to do this 
@@ -55,7 +56,7 @@ def addPostHistory(entry):
 
 	config["posthistory"][getCurrentPostNumber()] = entry
 
-	with open("config.yml", "w") as file:
+	with getFile("config.yml", "w") as file:
 		dump(config, file)
 
 	return
@@ -66,8 +67,8 @@ def generatePrevPostSection():
 	if(postHistory == {}):
 		return ""
 	else:
-		with open("Reddit Post Templates/previousPostSectionTemplate.md") as prevPostSectionFile, \
-			 open("Reddit Post Templates/previousPostTemplate.md") as prevPostFile:
+		with getFile("Reddit Post Templates/previousPostSectionTemplate.md") as prevPostSectionFile, \
+			 getFile("Reddit Post Templates/previousPostTemplate.md") as prevPostFile:
 
 			prevPostSectTemplate = prevPostSectionFile.read()
 			prevPostTemplate = prevPostFile.read()
@@ -91,9 +92,9 @@ if(__name__ == '__main__'):
 		pair = random.choice(pairings)
 		commander_pair = convertStrToCommanderPair(pair)
 
-		with open("Reddit Post Templates/mainTemplate.md") as mainFile, \
-			 open("Reddit Post Templates/commanderTemplate.md") as commanderFile, \
-			 open("Reddit Post Templates/titleTemplate.md") as titleFile:
+		with getFile("Reddit Post Templates/mainTemplate.md") as mainFile, \
+			 getFile("Reddit Post Templates/commanderTemplate.md") as commanderFile, \
+			 getFile("Reddit Post Templates/titleTemplate.md") as titleFile:
 
 			mainTemplate = mainFile.read()
 			commanderTemplate = commanderFile.read()

@@ -10,7 +10,7 @@ def getRedditInstance():
 	if(reddit):
 		return reddit
 
-	with open("credentials.yml") as file:
+	with getFile("credentials.yml") as file:
 		credentials = safe_load(file)["reddit"]
 
 	reddit = praw.Reddit(**credentials)
