@@ -14,6 +14,8 @@ If you did, what convinced you to buy either of them?
 
 Are there any crazy builds you've tried that worked? Any crazy stories?
 
+Which of their prestiges are your favorite? Least favorite?
+
 Tell us your thoughts!
 
 ---
