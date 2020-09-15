@@ -4,10 +4,10 @@ from urllib.request import urlopen
 winrates = {}
 
 def getWinRateOf(commanderName):
-	return getPickAndWinRateOf(commanderName)[1]
+	return getPickAndWinRateOf(commanderName)[1] * 100
 
 def getPickRateOf(commanderName):
-	return getPickAndWinRateOf(commanderName)[0]
+	return getPickAndWinRateOf(commanderName)[0] * 100
 
 def getPickAndWinRateOf(commanderName):
 	if(commanderName == "Han & Horner"): # Hope no more exceptions come later on :/

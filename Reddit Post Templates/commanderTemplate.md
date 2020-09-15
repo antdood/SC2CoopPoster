@@ -8,4 +8,4 @@
 
 - **Win Rate** : {0.winrate:.2f}%^*
 
-On [SC2Coop]({0.sc2cooplink})|[Wiki]({0.wikilink})
+On [SC2Coop]({0.sc2cooplinksafe})|[Wiki]({0.wikilinksafe})

@@ -31,3 +31,11 @@ class Commander:
 	@property
 	def pickrate(self):
 		return winrates.getPickRateOf(self.name)
+
+	@property
+	def sc2cooplinksafe(self):
+		return self.sc2cooplink.replace("(", '\(').replace(")", '\)')
+
+	@property
+	def wikilinksafe(self):
+		return self.wikilink.replace("(", '\(').replace(")", '\)')
