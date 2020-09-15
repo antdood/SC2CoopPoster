@@ -40,23 +40,23 @@ def getCurrentPostNumber():
 	return len(getPostHistory()) + 1
 
 def getPostHistory():
-	with getFile("config.yml", "r") as file:
-		return safe_load(file)["posthistory"] or {}
+	with getFile("post_history.yml", "r") as file:
+		return safe_load(file) or {}
 
 def generatePostHistoryEntry(postID, pair):
 	return {"url" : getRedditLink(postID).url, "pair" : pair}
 
 def addPostHistory(entry):
-	with getFile("config.yml", "r") as file:
+	with getFile("post_history.yml", "r") as file:
 		config = safe_load(file)
 
 	# for first run, should be a better way to do this 
-	if(config["posthistory"] == None):
-		config["posthistory"] = {}
+	if(config == None):
+		config = {}
 
-	config["posthistory"][getCurrentPostNumber()] = entry
+	config[getCurrentPostNumber()] = entry
 
-	with getFile("config.yml", "w") as file:
+	with getFile("post_history.yml", "w") as file:
 		dump(config, file)
 
 	return
